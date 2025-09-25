@@ -7,3 +7,15 @@ npx sanity@latest typegen generate
 npm run typegen
 
 nvm use 20.19.5
+
+
+npx sanity@latest dataset create development
+
+
+Run this to export the current documents and assets from the production dataset/environment
+npx sanity@latest dataset export production
+
+Run this to import the production.tar.gz dataset backup into the development dataset
+npx sanity@latest dataset import production.tar.gz development
+
+use --replace or --missing
