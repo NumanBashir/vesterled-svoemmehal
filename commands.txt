@@ -1,0 +1,9 @@
+List of commands to remember:
+
+Re-run this every time you modify your schema types or GROQ queries
+npx sanity@latest typegen generate
+
+
+npm run typegen
+
+nvm use 20.19.5
