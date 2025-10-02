@@ -20,3 +20,14 @@ Run this to import the production.tar.gz dataset backup into the development dat
 npx sanity@latest dataset import production.tar.gz development
 
 use --replace or --missing
+
+
+From dev to prod
+npx sanity dataset export development
+npx sanity dataset import development.tar.gz production
+
+
+👉 Kort sagt:
+Schemas & funktionalitet testes lokalt.
+Indhold laves i production.
+Development er til test, ikke til rigtigt content.
