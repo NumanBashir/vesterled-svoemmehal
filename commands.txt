@@ -4,6 +4,7 @@ Re-run this every time you modify your schema types or GROQ queries
 npx sanity@latest typegen generate
 
 
+Every time we update our types or queries we need to run this command:
 npm run typegen
 
 nvm use 20.19.5
