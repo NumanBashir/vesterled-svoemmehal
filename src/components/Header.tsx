@@ -8,7 +8,7 @@ export function Header() {
           className="text-blue-700 md:text-xl font-bold tracking-tight"
           href="/"
         >
-          Layer Caker
+          Vesterled Svømmehal
         </Link>
         <ul className="flex items-center gap-4 font-semibold text-slate-700">
           <li>
