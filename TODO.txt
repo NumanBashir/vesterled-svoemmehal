@@ -1,1 +1,11 @@
-// Hero section
+- Hero section
+
+1. Global “Site Settings” document
+siteTitle (used for SEO, <title> tags)
+description (meta description)
+logo (main site logo)
+favicon
+primaryColor / secondaryColor (if you allow theme customization)
+contactEmail, phoneNumber, address
+socialLinks (Instagram, Facebook, LinkedIn, etc.)
+footerText or copyright info
