@@ -10,7 +10,10 @@ export const siteSettingsType = defineType({
     defineField({
       name: "favicon",
       title: "Favicon",
-      type: "image",
+      type: "file",
+      options: {
+        accept: ".ico,.png,.jpg,.svg",
+      },
       description: "Square image works best",
     }),
   ],

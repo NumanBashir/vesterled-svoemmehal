@@ -1,13 +1,20 @@
 import "@/app/globals.css";
-import type { Metadata } from "next";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
 
-export const metadata: Metadata = {
-  title: "Vesterled Svømmehal",
-  description: "Vesterled Svømmehal website built with Next.js and Sanity",
-  icons: {
-    icon: "/assets/favicon_io/favicon.ico",
-  },
-};
+export async function generateMetadata() {
+  const { data: siteSettings } = await sanityFetch({
+    query: SITE_SETTINGS_QUERY,
+  });
+
+  return {
+    title: "Vesterled Svømmehal",
+    description: "Vesterled Svømmehal website built with Next.js and Sanity",
+    icons: {
+      icon: siteSettings?.faviconUrl,
+    },
+  };
+}
 
 export default function RootLayout({
   children,
