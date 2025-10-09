@@ -31,3 +31,9 @@ npx sanity dataset import development.tar.gz production
 Schemas & funktionalitet testes lokalt.
 Indhold laves i production.
 Development er til test, ikke til rigtigt content.
+
+
+Start med at definere i schemaTypes ny schema
+De data du ønsker at fetche skal laves i queries.ts som en GROQ query
+Kør npm run typegen ELLER npx sanity@latest typegen generate
+Fetch dataen i den ønkset fil med sanityFetch
