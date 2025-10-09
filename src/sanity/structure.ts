@@ -25,6 +25,8 @@ export const structure: StructureResolver = (S) =>
       ...S.documentTypeListItems().filter(
         (item) =>
           item.getId() &&
-          !["post", "category", "author"].includes(item.getId()!)
+          !["post", "category", "author", "siteSettings"].includes(
+            item.getId()!
+          )
       ),
     ]);
