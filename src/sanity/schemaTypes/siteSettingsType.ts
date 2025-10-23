@@ -8,6 +8,18 @@ export const siteSettingsType = defineType({
   icon: CogIcon,
   fields: [
     defineField({
+      name: "siteTitle",
+      title: "Site Title",
+      type: "string",
+      description: "The title of the website",
+    }),
+    defineField({
+      name: "siteDescription",
+      title: "Site Description",
+      type: "text",
+      description: "A brief description of the website",
+    }),
+    defineField({
       name: "favicon",
       title: "Favicon",
       type: "file",

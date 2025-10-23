@@ -8,8 +8,10 @@ export async function generateMetadata() {
   });
 
   return {
-    title: "Vesterled Svømmehal",
-    description: "Vesterled Svømmehal website built with Next.js and Sanity",
+    title: siteSettings?.siteTitle || "Meta Vesterled Svømmehal",
+    description:
+      siteSettings?.siteDescription ||
+      "Vesterled Svømmehal website built with Next.js and Sanity",
     icons: {
       icon: siteSettings?.faviconUrl,
     },
