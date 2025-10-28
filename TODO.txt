@@ -9,3 +9,7 @@ primaryColor / secondaryColor (if you allow theme customization)
 contactEmail, phoneNumber, address
 socialLinks (Instagram, Facebook, LinkedIn, etc.)
 footerText or copyright info
+
+Lav en AI som kan skræddersy kundens behov og de komponenter de ønsker
+
+use text-primary, secondary or accent to use colors from Sanity

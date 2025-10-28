@@ -4,7 +4,12 @@ import { defineQuery } from "next-sanity";
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   "siteTitle": siteTitle,
   "siteDescription": siteDescription,
-  "faviconUrl": favicon.asset->url
+  "faviconUrl": favicon.asset->url,
+  "brandColors": {
+    "primary": brandColors.primary.hex,
+    "secondary": brandColors.secondary.hex,
+    "accent": brandColors.accent.hex
+  }
 }`);
 
 // Fetches the 12 most recent posts with defined slugs

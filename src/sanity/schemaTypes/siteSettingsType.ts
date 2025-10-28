@@ -108,5 +108,28 @@ export const siteSettingsType = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "brandColors",
+      title: "Brand Colors",
+      type: "object",
+      fields: [
+        defineField({
+          name: "primary",
+          title: "Primary Color",
+          type: "color",
+        }),
+        defineField({
+          name: "secondary",
+          title: "Secondary Color",
+          type: "color",
+        }),
+        defineField({
+          name: "accent",
+          title: "Accent Color",
+          type: "color",
+        }),
+      ],
+      options: { collapsible: true, collapsed: false },
+    }),
   ],
 });

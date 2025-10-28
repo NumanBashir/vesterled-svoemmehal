@@ -261,6 +261,44 @@ export type SiteSettings = {
     _type: "socialLink";
     _key: string;
   }>;
+  brandColors?: {
+    primary?: Color;
+    secondary?: Color;
+    accent?: Color;
+  };
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -381,15 +419,20 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Hero | Post | Author | Category | BlockContent | SiteSettings | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Hero | Post | Author | Category | BlockContent | SiteSettings | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{  "siteTitle": siteTitle,  "siteDescription": siteDescription,  "faviconUrl": favicon.asset->url}
+// Query: *[_type == "siteSettings"][0]{  "siteTitle": siteTitle,  "siteDescription": siteDescription,  "faviconUrl": favicon.asset->url,  "brandColors": {    "primary": brandColors.primary.hex,    "secondary": brandColors.secondary.hex,    "accent": brandColors.accent.hex  }}
 export type SITE_SETTINGS_QUERYResult = {
   siteTitle: string | null;
   siteDescription: string | null;
   faviconUrl: string | null;
+  brandColors: {
+    primary: string | null;
+    secondary: string | null;
+    accent: string | null;
+  };
 } | null;
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{  _id,  title,  slug,  body,  mainImage,  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
@@ -550,7 +593,7 @@ export type POST_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"siteSettings\"][0]{\n  \"siteTitle\": siteTitle,\n  \"siteDescription\": siteDescription,\n  \"faviconUrl\": favicon.asset->url\n}": SITE_SETTINGS_QUERYResult;
+    "*[_type == \"siteSettings\"][0]{\n  \"siteTitle\": siteTitle,\n  \"siteDescription\": siteDescription,\n  \"faviconUrl\": favicon.asset->url,\n  \"brandColors\": {\n    \"primary\": brandColors.primary.hex,\n    \"secondary\": brandColors.secondary.hex,\n    \"accent\": brandColors.accent.hex\n  }\n}": SITE_SETTINGS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  },\n  relatedPosts[]{\n    _key, // required for drag and drop\n    ...@->{_id, title, slug} // get fields from the referenced post\n  }\n}": POST_QUERYResult;
