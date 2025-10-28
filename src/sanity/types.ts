@@ -219,6 +219,32 @@ export type SiteSettings = {
   _rev: string;
   siteTitle?: string;
   siteDescription?: string;
+  email?: string;
+  phoneNumber?: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  openGraphImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   favicon?: {
     asset?: {
       _ref: string;
@@ -229,6 +255,12 @@ export type SiteSettings = {
     media?: unknown;
     _type: "file";
   };
+  socialLinks?: Array<{
+    platform?: "facebook" | "X" | "instagram" | "linkedin" | "youtube" | "pinterest" | "tiktok" | "snapchat" | "reddit" | "other";
+    url?: string;
+    _type: "socialLink";
+    _key: string;
+  }>;
 };
 
 export type SanityImagePaletteSwatch = {
