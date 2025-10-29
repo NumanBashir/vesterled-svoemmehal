@@ -4,9 +4,6 @@ import { Hero } from "@/components/Hero";
 export default async function Page() {
   return (
     <div className="flex flex-col">
-      <button className="bg-primary hover:bg-secondary text-accent px-5 py-2 rounded-full">
-        Book your swim
-      </button>
       <Hero
         title="Velkommen til Vesterled Svømmehal"
         subtitle="Tryghed i vandet"
