@@ -45,17 +45,7 @@ export default async function RootLayout({
         } as React.CSSProperties
       }
     >
-      <body
-        style={
-          {
-            "--color-primary": colors.primary || "#0ea5e9",
-            "--color-secondary": colors.secondary || "#64748b",
-            "--color-accent": colors.accent || "#22c55e",
-          } as React.CSSProperties
-        }
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
