@@ -234,7 +234,7 @@ export default async function Page() {
             description="Oplev lyse omgivelser, varmtvandsbassiner og gode faciliteter til både motionister og afslapning."
             imageSrc="/assets/test_images/feature2.png"
             imageAlt="Illustration af svømmehal"
-            imagePosition="left"
+            imagePosition="right"
             cta={{ label: "Se faciliteter", href: "/posts" }}
           />
         </section>
