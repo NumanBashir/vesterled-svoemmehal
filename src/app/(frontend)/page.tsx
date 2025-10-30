@@ -125,12 +125,8 @@ export default async function Page() {
       alt: "Svømmere i bassin",
     },
     {
-      src: "/assets/test_images/ronaldo.png",
+      src: "/assets/test_images/zac.png",
       alt: "Holdtræning i vand",
-    },
-    {
-      src: "/assets/test_images/feature2.png",
-      alt: "Svømmeinstruktør med børn",
     },
   ];
 
@@ -166,9 +162,21 @@ export default async function Page() {
     phone: "+45 44 44 44 44",
     email: "kontakt@vesterledsvoemmehal.dk",
     socialLinks: [
-      { label: "Facebook", href: "https://www.facebook.com/vesterled", icon: "📘" },
-      { label: "Instagram", href: "https://www.instagram.com/vesterled", icon: "📸" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/vesterled", icon: "🔗" },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/vesterled",
+        icon: "📘",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/vesterled",
+        icon: "📸",
+      },
+      {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/vesterled",
+        icon: "🔗",
+      },
     ],
     openingHours: [
       { label: "Mandag - Torsdag", value: "06.30 – 21.00" },
@@ -189,7 +197,7 @@ export default async function Page() {
         cta={{ label: "Se aktiviteter", href: "/posts" }}
       />
 
-      <main className="-mt-14 space-y-16 bg-white pb-16 pt-6 sm:-mt-20 md:-mt-24">
+      <main className="space-y-16 bg-white pb-16 pt-6">
         <section className="container mx-auto px-6 sm:px-8 md:px-12">
           <FeatureShowcase
             eyebrow="Aktiviteter"
@@ -197,7 +205,7 @@ export default async function Page() {
             description="Fra babysvømning og vandleg til intensiv træning og wellness – vores program har plads til alle aldre og niveauer."
             imageSrc="/assets/test_images/ronaldo.png"
             imageAlt="Illustration af svømmeaktiviteter"
-            imagePosition="right"
+            imagePosition="left"
             cta={{ label: "Udforsk hold", href: "/posts" }}
           />
         </section>

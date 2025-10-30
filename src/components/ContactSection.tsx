@@ -108,68 +108,6 @@ export function ContactSection({
             Send besked
           </button>
         </form>
-
-        <div className="grid w-full max-w-4xl gap-6 text-left text-blue-100/80 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/10 p-6 shadow-md shadow-blue-900/10">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">
-              Besøg os
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-white">{address}</p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/10 p-6 shadow-md shadow-blue-900/10">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">
-              Ring eller skriv
-            </h3>
-            <div className="mt-3 space-y-3 text-sm">
-              <a
-                href={`tel:${phone.replace(/[^+\d]/g, "")}`}
-                className="flex items-center gap-2 text-white transition hover:text-blue-100"
-              >
-                <span aria-hidden="true" className="text-lg">
-                  📞
-                </span>
-                <span className="font-semibold">{phone}</span>
-              </a>
-              <a
-                href={`mailto:${email}`}
-                className="flex items-center gap-2 text-white transition hover:text-blue-100"
-              >
-                <span aria-hidden="true" className="text-lg">
-                  ✉️
-                </span>
-                <span className="font-semibold">{email}</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/10 p-6 shadow-md shadow-blue-900/10">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">
-              Åbningstider
-            </h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              {openingHours.map((entry) => (
-                <li key={entry.label} className="flex items-center justify-between gap-4 text-white">
-                  <span>{entry.label}</span>
-                  <span className="font-semibold text-blue-100">{entry.value}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">
-          {socialLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 transition hover:border-white/20 hover:bg-white/20"
-            >
-              <span aria-hidden="true">{link.icon ?? "🌐"}</span>
-              {link.label}
-            </a>
-          ))}
-        </div>
       </div>
     </section>
   );
