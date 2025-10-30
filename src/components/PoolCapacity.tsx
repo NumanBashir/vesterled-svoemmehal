@@ -1,154 +1,94 @@
-"use client";
+export type CrowdLevel = "quiet" | "moderate" | "busy";
 
-import { useMemo } from "react";
+export type CrowdPoint = {
+  hour: string;
+  level: CrowdLevel;
+};
 
 type PoolCapacityProps = {
-  occupancy: number;
-  capacity: number;
-  lastUpdated?: string;
-  isRefreshing?: boolean;
-  onRefresh?: () => void;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  data: CrowdPoint[];
   className?: string;
 };
 
-type CapacityStatus = {
-  label: string;
-  description: string;
-  badgeClass: string;
-  barClass: string;
-};
+const levelConfig: Record<CrowdLevel, { label: string; color: string; height: string }> =
+  {
+    quiet: {
+      label: "Roligt",
+      color: "bg-emerald-400",
+      height: "h-12",
+    },
+    moderate: {
+      label: "Mellem",
+      color: "bg-amber-400",
+      height: "h-20",
+    },
+    busy: {
+      label: "Travlt",
+      color: "bg-rose-500",
+      height: "h-28",
+    },
+  };
 
 export function PoolCapacity({
-  occupancy,
-  capacity,
-  lastUpdated,
-  isRefreshing = false,
-  onRefresh,
+  title = "Hvornår er der travlest?",
+  subtitle = "Kapacitetsoversigt",
+  description = "Planlæg dit besøg med vores time-for-time overblik. Tidlige morgener og sene aftener er som regel de mindst travle perioder.",
+  data,
   className = "",
 }: PoolCapacityProps) {
-  const { label, description, badgeClass, barClass, fillPercent } = useMemo(() => {
-    const ratio = capacity > 0 ? occupancy / capacity : 0;
-    let status: CapacityStatus;
-
-    if (ratio >= 1) {
-      status = {
-        label: "Fuld belægning",
-        description: "Vi anbefaler at vente lidt – svømmehallen er fyldt.",
-        badgeClass: "bg-red-100 text-red-600 border-red-200",
-        barClass: "bg-gradient-to-r from-red-500 to-red-600",
-      };
-    } else if (ratio >= 0.75) {
-      status = {
-        label: "Travlt",
-        description: "Der er mange i bassinet – forvent lidt ventetid.",
-        badgeClass: "bg-amber-100 text-amber-600 border-amber-200",
-        barClass: "bg-gradient-to-r from-amber-400 to-amber-500",
-      };
-    } else {
-      status = {
-        label: "Roligt",
-        description: "Massere af plads til en god svømmetur.",
-        badgeClass: "bg-emerald-100 text-emerald-600 border-emerald-200",
-        barClass: "bg-gradient-to-r from-emerald-400 to-teal-500",
-      };
-    }
-
-    return {
-      ...status,
-      fillPercent: Math.min(100, Math.max(0, Math.round(ratio * 100))),
-    };
-  }, [capacity, occupancy]);
-
-  const remaining = Math.max(0, capacity - occupancy);
-
   return (
     <section
       className={`relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md shadow-blue-900/10 ${className}`}
     >
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-400" />
-      <div className="relative px-8 py-8 sm:px-10 md:px-12">
-        <header className="flex flex-wrap items-start justify-between gap-6">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-500">
-              Aktuel kapacitet
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">
-              Pool Capacity
-            </h2>
-            <p className="mt-2 text-sm text-slate-600">{description}</p>
-          </div>
-
-          <div className="flex flex-col items-end gap-3 text-right">
-            <span
-              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] ${badgeClass}`}
-            >
-              <span className="h-2 w-2 rounded-full bg-current" />
-              {label}
-            </span>
-            <div className="text-sm text-slate-500">
-              <span className="font-semibold text-slate-700">{occupancy}</span>
-              <span className="mx-1 text-slate-400">/</span>
-              <span>{capacity}</span> gæster
-            </div>
-          </div>
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-sky-400 to-teal-400" />
+      <div className="relative px-8 py-10 sm:px-10 md:px-12">
+        <header className="text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-500">
+            {subtitle}
+          </p>
+          <h2 className="mt-2 text-3xl font-semibold text-slate-900 sm:text-4xl">
+            {title}
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-600">
+            {description}
+          </p>
         </header>
 
-        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="w-full">
-            <div className="flex items-center justify-between text-sm text-slate-500">
-              <span>Belægning</span>
-              <span>{fillPercent}% fyldt</span>
-            </div>
-            <div className="mt-2 h-3 w-full rounded-full bg-slate-100">
-              <div
-                className={`${barClass} h-3 rounded-full transition-all duration-500`}
-                style={{ width: `${fillPercent}%` }}
-              />
-            </div>
-
-            <div className="mt-4 grid gap-2 text-sm text-slate-600 sm:grid-cols-2">
-              <div className="rounded-xl border border-slate-200 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                  I hallen
-                </p>
-                <p className="mt-1 text-lg font-semibold text-slate-900">
-                  {occupancy}
-                </p>
-              </div>
-              <div className="rounded-xl border border-slate-200 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                  Ledige pladser
-                </p>
-                <p className="mt-1 text-lg font-semibold text-slate-900">
-                  {remaining}
-                </p>
-              </div>
-            </div>
+        <div className="mt-10 flex flex-col items-center gap-8">
+          <div className="flex w-full max-w-4xl items-end justify-between gap-3">
+            {data.map((point) => {
+              const config = levelConfig[point.level];
+              return (
+                <div key={point.hour} className="flex flex-1 flex-col items-center gap-3">
+                  <div
+                    className={`flex w-full max-w-[60px] items-end justify-center rounded-t-2xl bg-blue-50/80 pb-2`}
+                    style={{ minHeight: "7rem" }}
+                  >
+                    <div
+                      className={`w-10 rounded-full ${config.color} ${config.height} shadow-sm shadow-blue-900/10 transition`}
+                    />
+                  </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    {point.hour}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="flex flex-col items-end gap-3">
-            <button
-              type="button"
-              onClick={onRefresh}
-              disabled={!onRefresh || isRefreshing}
-              className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-300"
-            >
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            {Object.entries(levelConfig).map(([key, config]) => (
               <span
-                className={`h-2 w-2 rounded-full ${
-                  isRefreshing ? "bg-amber-400 animate-pulse" : "bg-emerald-400"
-                }`}
-              />
-              Opdater
-            </button>
-            {lastUpdated ? (
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Senest opdateret {lastUpdated}
-              </p>
-            ) : (
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Live data
-              </p>
-            )}
+                key={key}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-slate-600"
+              >
+                <span className={`h-3 w-3 rounded-full ${config.color}`} />
+                {config.label}
+              </span>
+            ))}
           </div>
         </div>
       </div>

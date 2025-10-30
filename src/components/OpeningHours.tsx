@@ -50,89 +50,85 @@ export function OpeningHours({
 
   return (
     <section
-      className={`relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm shadow-blue-900/5 ${className}`}
+      className={`relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md shadow-blue-900/10 ${className}`}
     >
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300" />
 
-      <div className="grid gap-8 px-8 pb-8 pt-10 lg:grid-cols-[2fr_1fr] lg:gap-12">
-        <div>
-          <header className="mb-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-500">
-              Plan your visit
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-900">
-              Opening hours
-            </h2>
-            <p className="mt-2 text-sm text-slate-500">
-              Check today&apos;s schedule and see when we&apos;re open during
-              the week.
-            </p>
-          </header>
+      <div className="relative flex flex-col items-center gap-10 px-8 pb-10 pt-12 text-center sm:px-12">
+        <header className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-500">
+            Plan your visit
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
+            Opening hours
+          </h2>
+          <p className="mt-3 text-sm text-slate-500">
+            Hold øje med dagens åbningstid og planlæg ugens besøg. Vi
+            opdaterer tiderne løbende for særlige arrangementer og ferier.
+          </p>
+        </header>
 
-          <ul className="flex flex-col gap-3">
-            {hours.map((entry) => {
-              const entryDay = normalizeWeekday(entry.day);
-              const isToday = entryDay && today && entryDay === today;
-              const isClosed =
-                entry.closed || (!entry.opensAt && !entry.closesAt);
+        <ul className="grid w-full max-w-3xl gap-3">
+          {hours.map((entry) => {
+            const entryDay = normalizeWeekday(entry.day);
+            const isToday = entryDay && today && entryDay === today;
+            const isClosed =
+              entry.closed || (!entry.opensAt && !entry.closesAt);
 
-              return (
-                <li
-                  key={entry.day}
-                  className={`flex items-start justify-between rounded-2xl border px-5 py-4 transition ${
-                    isToday
-                      ? "border-blue-500 bg-blue-50/80 text-blue-900 shadow-sm"
-                      : "border-slate-200 bg-white text-slate-700"
-                  }`}
-                >
-                  <div>
+            return (
+              <li
+                key={entry.day}
+                className={`rounded-2xl border px-6 py-5 transition ${
+                  isToday
+                    ? "border-blue-400 bg-blue-50/80 text-blue-900 shadow-sm shadow-blue-100"
+                    : "border-slate-200 bg-white text-slate-700"
+                }`}
+              >
+                <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
+                  <div className="space-y-1 text-center sm:text-left">
                     <p
-                      className={`text-sm font-semibold uppercase tracking-[0.15em] ${
+                      className={`text-sm font-semibold uppercase tracking-[0.2em] ${
                         isToday ? "text-blue-600" : "text-slate-500"
                       }`}
                     >
                       {entry.label ??
                         (entryDay ? dayLabels[entryDay] : entry.day)}
                     </p>
-                    <p className="mt-2 text-base font-medium">
+                    <p className="text-base font-medium">
                       {isClosed
-                        ? "Closed"
+                        ? "Lukket"
                         : `${entry.opensAt ?? "—"} – ${entry.closesAt ?? "—"}`}
                     </p>
-                    {entry.details ? (
-                      <p className="mt-2 text-sm text-slate-500">
-                        {entry.details}
-                      </p>
-                    ) : null}
-                    {isToday ? (
-                      <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-blue-600/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">
-                        Today
-                      </p>
-                    ) : null}
                   </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+                  {entry.details ? (
+                    <p className="text-sm text-slate-500">{entry.details}</p>
+                  ) : null}
+                </div>
+                {isToday ? (
+                  <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-blue-600/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">
+                    I dag
+                  </p>
+                ) : null}
+              </li>
+            );
+          })}
+        </ul>
 
-        <aside className="space-y-4 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 text-slate-700">
-          <h3 className="text-lg font-semibold text-blue-900">{noteTitle}</h3>
-          {notes && notes.length > 0 ? (
-            <ul className="space-y-3 text-sm leading-relaxed">
+        {notes && notes.length > 0 ? (
+          <div className="w-full max-w-2xl rounded-2xl border border-blue-100 bg-blue-50/70 px-6 py-6 text-left shadow-sm shadow-blue-100">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+              {noteTitle}
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm text-slate-600">
               {notes.map((note, index) => (
-                <li key={index} className="flex gap-3">
-                  <span className="mt-1 h-[6px] w-[6px] rounded-full bg-blue-400" />
+                <li key={index} className="flex gap-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-blue-400" />
                   <span>{note}</span>
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="text-sm text-slate-500">
-              No special events or holiday updates at the moment.
-            </p>
-          )}
-        </aside>
+          </div>
+        ) : null}
       </div>
     </section>
   );
