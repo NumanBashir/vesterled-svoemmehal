@@ -1,7 +1,35 @@
 import { FeatureShowcase } from "@/components/FeatureShowcase";
 import { Hero } from "@/components/Hero";
+import { OpeningHours } from "@/components/OpeningHours";
+import type { OpeningHoursEntry } from "@/components/OpeningHours";
 
 export default async function Page() {
+  const weeklyHours: OpeningHoursEntry[] = [
+    { day: "monday", label: "Mandag", opensAt: "06.30", closesAt: "20.00" },
+    { day: "tuesday", label: "Tirsdag", opensAt: "06.30", closesAt: "20.00" },
+    { day: "wednesday", label: "Onsdag", opensAt: "06.30", closesAt: "20.00" },
+    { day: "thursday", label: "Torsdag", opensAt: "06.30", closesAt: "21.00" },
+    { day: "friday", label: "Fredag", opensAt: "06.30", closesAt: "19.00" },
+    {
+      day: "saturday",
+      label: "Lørdag",
+      opensAt: "08.00",
+      closesAt: "16.00",
+    },
+    {
+      day: "sunday",
+      label: "Søndag",
+      opensAt: "08.00",
+      closesAt: "16.00",
+    },
+  ];
+
+  const specialNotes = [
+    "Familieaftener hver torsdag fra kl. 18.00 med ekstra livredder til stede.",
+    "Morgensvømning for pensionister mandag og onsdag fra kl. 06.30-08.00.",
+    "Lukket på officielle helligdage – se kalenderen for detaljer.",
+  ];
+
   return (
     <div className="flex flex-col">
       <Hero
@@ -35,6 +63,14 @@ export default async function Page() {
             imageAlt="Illustration af svømmehal"
             imagePosition="left"
             cta={{ label: "Se faciliteter", href: "/posts" }}
+          />
+        </section>
+
+        <section className="container mx-auto px-6 sm:px-8 md:px-12">
+          <OpeningHours
+            hours={weeklyHours}
+            notes={specialNotes}
+            noteTitle="Særlige åbningstider"
           />
         </section>
       </main>
