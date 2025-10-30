@@ -2,6 +2,8 @@ import { FeatureShowcase } from "@/components/FeatureShowcase";
 import { Hero } from "@/components/Hero";
 import { OpeningHours } from "@/components/OpeningHours";
 import type { OpeningHoursEntry } from "@/components/OpeningHours";
+import { PricingSection } from "@/components/PricingSection";
+import type { PricingTier } from "@/components/PricingSection";
 
 export default async function Page() {
   const weeklyHours: OpeningHoursEntry[] = [
@@ -30,6 +32,51 @@ export default async function Page() {
     "Lukket på officielle helligdage – se kalenderen for detaljer.",
   ];
 
+  const pricingTiers: PricingTier[] = [
+    {
+      id: "adults",
+      title: "Voksenbillet",
+      price: "65 kr.",
+      subtext: "pr. gang",
+      description: "Til dig der vil svømme, træne eller slappe af i saunaen.",
+      emoji: "🧑🏽",
+    },
+    {
+      id: "kids",
+      title: "Børnebillet",
+      price: "40 kr.",
+      subtext: "pr. gang",
+      description: "Gælder til og med 14 år. Børn under 10 skal have ledsager.",
+      emoji: "👦🏽",
+    },
+    {
+      id: "seniors",
+      title: "Seniorbillet",
+      price: "45 kr.",
+      subtext: "pr. gang",
+      description: "For svømmere på 65+ med rolige morgentimer inkluderet.",
+      emoji: "👴🏼",
+    },
+    {
+      id: "membership",
+      title: "Månedskort",
+      price: "289 kr.",
+      subtext: "pr. måned",
+      description:
+        "Ubegrænset adgang med fast lav pris og gæstepas hver måned.",
+      emoji: "🔑",
+      highlight: true,
+    },
+    {
+      id: "clipcard",
+      title: "Klippekort (10x)",
+      price: "550 kr.",
+      subtext: "gyldig i 12 mdr.",
+      description: "Del med familien og brug klippene når det passer jer.",
+      emoji: "🎟️",
+    },
+  ];
+
   return (
     <div className="flex flex-col">
       <Hero
@@ -52,6 +99,10 @@ export default async function Page() {
             imagePosition="right"
             cta={{ label: "Udforsk hold", href: "/posts" }}
           />
+        </section>
+
+        <section className="container mx-auto px-6 sm:px-8 md:px-12">
+          <PricingSection tiers={pricingTiers} />
         </section>
 
         <section className="container mx-auto px-6 sm:px-8 md:px-12">
