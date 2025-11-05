@@ -1,15 +1,15 @@
 import { defineType, defineField } from "sanity";
 import { BlockElementIcon } from "@sanity/icons";
 
-export const heroType = defineType({
-  name: "hero",
-  title: "Hero Section",
+export const heroType2 = defineType({
+  name: "hero2",
+  title: "Hero2 Section",
   type: "document",
   icon: BlockElementIcon,
   fields: [
     defineField({
       name: "heroTitle",
-      title: "Hero Title",
+      title: "Hero2 Title",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -19,11 +19,11 @@ export const heroType = defineType({
       of: [{ type: "block" }],
     }),
     defineField({
-      name: "heroImage",
+      name: "hero2Image",
       type: "image",
     }),
     defineField({
-      name: "heroCTAButtonText",
+      name: "hero2CTAButtonText",
       type: "string",
     }),
   ],
