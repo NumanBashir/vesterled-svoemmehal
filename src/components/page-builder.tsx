@@ -8,6 +8,8 @@ type PageBuilderProps = {
   content: NonNullable<PAGE_QUERYResult>["content"];
 };
 
+type PageBlock = NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number];
+
 export function PageBuilder({ content }: PageBuilderProps) {
   if (!Array.isArray(content)) {
     return null;
@@ -15,7 +17,7 @@ export function PageBuilder({ content }: PageBuilderProps) {
 
   return (
     <main>
-      {content.map((block: any) => {
+      {content.map((block: PageBlock, i: number) => {
         switch (block._type) {
           case "hero":
             return <Hero key={block._key} {...block} />;
@@ -26,8 +28,8 @@ export function PageBuilder({ content }: PageBuilderProps) {
           case "faqs":
             return <FAQs key={block._key} {...block} />;
           default:
-            // This is a fallback for when we don't have a block type
-            return <div key={block._key}>Block not found: {block._type}</div>;
+            // Fallback for unexpected block types: don't rely on block shape here
+            return <div key={`unknown-${i}`}>Block not found</div>;
         }
       })}
     </main>
