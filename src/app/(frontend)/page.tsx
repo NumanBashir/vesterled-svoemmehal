@@ -1,5 +1,5 @@
 import { FeatureShowcase } from "@/components/FeatureShowcase";
-import { Hero } from "@/components/Hero";
+import { Hero2 } from "@/components/Hero2";
 import { OpeningHours } from "@/components/OpeningHours";
 import type { OpeningHoursEntry } from "@/components/OpeningHours";
 import { PricingSection } from "@/components/PricingSection";
@@ -188,7 +188,7 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col">
-      <Hero
+      <Hero2
         title="Velkommen til Vesterled Svømmehal"
         subtitle="Tryghed i vandet"
         description="Din lokale svømmehal med aktiviteter, motion og oplevelser for hele familien. Her finder du svømning, træning, leg og afslapning i trygge rammer."

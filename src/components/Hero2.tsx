@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
-type HeroProps = {
+type Hero2Props = {
   title: string;
   subtitle?: string;
   description?: string;
@@ -13,14 +13,14 @@ type HeroProps = {
   };
 };
 
-export function Hero({
+export function Hero2({
   title,
   subtitle,
   description,
   imageSrc,
   imageAlt = "",
   cta,
-}: HeroProps) {
+}: Hero2Props) {
   return (
     <section className="relative isolate flex min-h-[420px] flex-col justify-end overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 text-white md:min-h-[520px]">
       {imageSrc ? (
